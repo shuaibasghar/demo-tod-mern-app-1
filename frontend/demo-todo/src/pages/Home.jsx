@@ -70,7 +70,7 @@ const Home = () => {
                                 Add Task
                             </button>
                         </div> */}
-                        {todo.length === 0 && (
+                        {todo?.length === 0 && (
                             <div className="flex items-center justify-center">
                                 <h1 className="text-2xl font-bold">
                                     No Task Created yet

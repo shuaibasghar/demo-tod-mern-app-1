@@ -29,7 +29,7 @@ const Login = () => {
             newErrors.password = "Password is required";
         }
         setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
+        return Object?.keys(newErrors)?.length === 0;
     };
 
     const onSubmit = async (event) => {

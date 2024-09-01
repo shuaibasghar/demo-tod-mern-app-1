@@ -38,7 +38,7 @@ const Register = () => {
 
         setErrors(newErrors);
         // This will return true because newErrors is empty
-        return Object.keys(newErrors).length === 0;
+        return Object?.keys(newErrors)?.length === 0;
     };
     const [state, setState] = useContext(AuthContext);
     const [loading, setLoading] = useState(false);

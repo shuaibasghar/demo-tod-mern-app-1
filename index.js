@@ -72,10 +72,12 @@ const todoSchema = new mongoose.Schema(
 );
 const todoModel = mongoose.model("todoDemo", todoSchema);
 
-app.get("/", (req, res) => {
-    res.send("<h1>HI, Server is running</h1>");
+// Catch-all route to serve the frontend application
+app.get("*", (req, res) => {
+    res.sendFile(
+        path.resolve(__dirname, "frontend/demo-todo/dist", "index.html")
+    );
 });
-
 //user controllers
 
 //register user

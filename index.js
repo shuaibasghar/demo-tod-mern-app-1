@@ -5,13 +5,15 @@ import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import path from "path";
+import { fileURLToPath } from "url";
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(
     cors({
-        origin: "http://localhost:5173",
+        origin: "http://35.154.46.198/",
+
         credentials: true,
     })
 );
@@ -31,9 +33,16 @@ const dbConnect = async () => {
 };
 dbConnect();
 
-//add path to dist build folder of frontend
-app.use(express.static("frontend/demo-todo/dist"));
+const __filename = fileURLToPath(import.meta.url);
+export const __dirname = path.dirname(__filename);
 
+//add path to dist build folder of frontend
+app.use(express.static(path.join(__dirname, "frontend/demo-todo/dist/")));
+const a = path.join(__dirname, "frontend/demo-todo/dist/index.html");
+// Catch-all route to serve the frontend application
+app.get("*", (req, res) => {
+    res.sendFile(a);
+});
 //user model
 const userSchema = new mongoose.Schema({
     name: {
@@ -73,12 +82,6 @@ const todoSchema = new mongoose.Schema(
 );
 const todoModel = mongoose.model("todoDemo", todoSchema);
 
-// Catch-all route to serve the frontend application
-app.get("*", (req, res) => {
-    res.sendFile(
-        path.resolve(__dirname, "frontend/demo-todo/dist", "index.html")
-    );
-});
 //user controllers
 
 //register user

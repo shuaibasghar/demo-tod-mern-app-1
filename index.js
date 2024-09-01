@@ -14,10 +14,15 @@ app.use(
         credentials: true,
     })
 );
+
 //connect db
 const dbConnect = async () => {
     try {
-        await mongoose.connect("mongodb://localhost:27017/todo-practice-demo");
+        // await mongoose.connect("mongodb://localhost:27017/todo-practice-demo");
+        await mongoose.connect(
+            "mongodb+srv://shuaib:shuaib123@cluster0.3ka8vsg.mongodb.net/todo-practice-demo-1"
+        );
+
         console.log("Database Connected");
     } catch (error) {
         console.log(error.message);

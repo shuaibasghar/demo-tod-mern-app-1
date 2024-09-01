@@ -36,13 +36,6 @@ dbConnect();
 const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
 
-//add path to dist build folder of frontend
-app.use(express.static(path.join(__dirname, "frontend/demo-todo/dist/")));
-const a = path.join(__dirname, "frontend/demo-todo/dist/index.html");
-// Catch-all route to serve the frontend application
-app.get("*", (req, res) => {
-    res.sendFile(a);
-});
 //user model
 const userSchema = new mongoose.Schema({
     name: {
@@ -232,6 +225,14 @@ app.get("/todo/:id", authMiddleware, async (req, res) => {
         console.log(error.message);
         res.status(500).json({ error: "Internal Server Error" });
     }
+});
+
+//add path to dist build folder of frontend
+app.use(express.static(path.join(__dirname, "frontend/demo-todo/dist/")));
+const a = path.join(__dirname, "frontend/demo-todo/dist/index.html");
+// Catch-all route to serve the frontend application
+app.get("*", (req, res) => {
+    res.sendFile(a);
 });
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
